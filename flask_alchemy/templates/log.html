@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Works log</h1>
+{% set a = "Action # " %}
+{% for job in jobs%}
+    <h2>{{ a }} {{ job["id"] }}</h2>
+    <table class="table">
+        <thead style="background-color: lightgray">
+            <tr>
+              <th scope="col" class="th-lg">Title of activity</th>
+              <th scope="col" class="th-lg">Team leader</th>
+                <th scope="col" class="th-lg">Duration</th>
+                <th scope="col" class="th-lg">List of Collaborators</th>
+                <th scope="col" class="th-lg">Is finished</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-success">
+                {% for key in ["job", "leader", "duration", "list"] %}
+                    <td bgcolor="lightgreen">{{ job[key] }}</td>
+                {% endfor %}
+                {% if job["finished"] == 1 %}
+                    <td bgcolor="lightgreen">Is finished</td>
+                {% else %}
+                    <td bgcolor="ffcccb">Is not finished</td>
+                {% endif %}
+            </tr>
+          </tbody>
+    </table>
+{% endfor %}
+{% endblock %}
