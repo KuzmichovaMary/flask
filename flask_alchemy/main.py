@@ -22,15 +22,19 @@ def reqister():
                                    form=form,
                                    message="Такой пользователь уже есть")
         user = User(
+            surname=form.surname.data,
             name=form.name.data,
+            age=form.age.data,
             email=form.email.data,
-            about=form.about.data
+            position=form.position.data,
+            speciality=form.speciality.data,
+            address=form.address.data
         )
         user.set_password(form.password.data)
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
-    return render_template('register.html', title='Регистрация', form=form)
+    return render_template('register.html', title='Register', form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -38,7 +42,7 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         return redirect('/success')
-    return render_template('login.html', title='Авторизация', form=form)
+    return render_template('login.html', title='Authentication', form=form)
 
 
 @app.route("/success")
